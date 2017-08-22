@@ -1,3 +1,6 @@
 aside{
   border: 30px solid red;
+  position: fixed;
+  display: inline-block;
+  padding: 30px;
 }

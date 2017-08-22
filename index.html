@@ -10,6 +10,7 @@
   function pokedex(name, imgsrc, types, height, weight) {
     $('aside h2').text(name);
     $('aside img').attr('src', imgsrc);
+    $('aside ul').children().remove();
     for(i = 0; i < types.length; i++) {
       var item = '<li>' + types[i].name + '</li>';
       $('aside ul').append(item);
