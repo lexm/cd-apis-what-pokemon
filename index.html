@@ -28,13 +28,7 @@
       var id = $(this).attr('id');
       var src = $(this).attr('src');
       var url = 'http://pokeapi.co/api/v1/pokemon/' + id + '/';
-      console.log(url);
       $.get(url, function(res) {
-        console.log(res.name);
-        console.log(src);
-        console.log(res.types);
-        console.log(res.height);
-        console.log(res.weight);
         pokedex(res.name, src, res.types, res.height, res.weight);
       }, 'json');
     })
