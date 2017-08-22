@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>What Pokemon?</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript">
+  function pokedex(name, imgsrc, types, height, weight) {
+    $('aside h2').text(name);
+    $('aside img').attr('src', imgsrc);
+    for(i = 0; i < types.length; i++) {
+      var item = '<li>' + types[i].name + '</li>';
+      $('aside ul').append(item);
+    }
+    $('#height').text(height);
+    $('#weight').text(weight);
+  }
+  $(document).ready(function() {
+    for(var i = 1; i <= 151; i++) {
+      var imgtag = '<img id="' + i + '" src="http://pokeapi.co/media/img/';
+      imgtag += i + '.png">';
+      $('main').append(imgtag);
+    }
+    $('main').on('click', 'img', function() {
+      var id = $(this).attr('id');
+      var src = $(this).attr('src');
+      var url = 'http://pokeapi.co/api/v1/pokemon/' + id + '/';
+      console.log(url);
+      $.get(url, function(res) {
+        console.log(res.name);
+        console.log(src);
+        console.log(res.types);
+        console.log(res.height);
+        console.log(res.weight);
+        pokedex(res.name, src, res.types, res.height, res.weight);
+      }, 'json');
+    })
+  })
+</script>
+</head>
+<body>
+  <div class="row">
+    <main class="six columns"></main>
+    <aside class="six columns">
+      <h2>Pokemon Name</h2>
+      <img src="#" alt="">
+      <h4>Types</h4>
+      <ul></ul>
+      <h4>Height</h4>
+      <p id="height"></p>
+      <h4>Weight</h4>
+      <p id="weight"></p>
+    </aside>
+  </div>
+</body>
+</html>
